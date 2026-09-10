@@ -1,0 +1,12 @@
+{
+  "name": "waiting-room",
+  "interface": { "displayName": "Waiting Room" },
+  "plugins": [
+    {
+      "name": "waiting-room",
+      "source": { "source": "local", "path": "./codex-plugin" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

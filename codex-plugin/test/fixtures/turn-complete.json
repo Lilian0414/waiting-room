@@ -1,0 +1,1 @@
+{"type":"agent-turn-complete","thread-id":"thread-secret","turn-id":"turn-secret","cwd":"/secret/repo","input-messages":["Fix my private payroll parser"],"last-assistant-message":"Implemented the private change."}
