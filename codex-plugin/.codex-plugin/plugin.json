@@ -1,0 +1,18 @@
+{
+  "name": "waiting-room",
+  "version": "0.1.0",
+  "description": "Open Waiting Room while Codex works without sharing task data.",
+  "author": { "name": "David Yang" },
+  "homepage": "https://github.com/Dav1dyang/waiting-room",
+  "repository": "https://github.com/Dav1dyang/waiting-room",
+  "license": "MIT",
+  "keywords": ["hooks", "webrtc", "waiting", "privacy"],
+  "interface": {
+    "displayName": "Waiting Room",
+    "shortDescription": "A private call while Codex works",
+    "longDescription": "Opens Waiting Room during long Codex tasks. Prompts, paths, and tool data stay on your machine.",
+    "developerName": "David Yang",
+    "category": "Productivity",
+    "capabilities": ["Hooks"]
+  }
+}

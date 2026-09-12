@@ -1,0 +1,1 @@
+{"session_id":"thread-secret","hook_event_name":"PreToolUse","cwd":"/secret/repo","tool_name":"shell","tool_input":{"command":"cat private.txt"}}
