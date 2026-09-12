@@ -44,6 +44,8 @@ The setup page opens in the plugin's own Chrome window. Allow the microphone on 
 
 To run this checkout instead of an installed copy, see `plugin/README.md`.
 
+Using Codex instead? See the [Codex adapter and installation guide](codex-plugin/README.md).
+
 ## The rules
 
 Audio first. Video only when you both click Show video. Your task stays on your machine. waiting-room records nothing. Rooms end after 30 minutes. Be kind; Report is one click. Three reports in a day and you are out for a day.
@@ -57,6 +59,7 @@ Each hook sends one small POST with exactly five fields: `token`, `event` (one o
 | Path | What it is |
 | --- | --- |
 | `plugin/` | The Claude Code plugin: eight async hooks, three commands, the classifier, the window opener. `plugin/README.md` for install and uninstall. |
+| `codex-plugin/` | The Codex adapter: native async lifecycle hooks and its installation guide. |
 | `worker/` | The lobby: one Cloudflare Worker, one Durable Object, the pure state machine in `src/lobby-core.js`, the room and setup pages in `public/`. `worker/README.md` for deploy. |
 | `scripts/probe-mac.sh` | Opens one real room window through the real path and reads back what it measured. |
 | `docs/PROTOCOL.md` | The contract between plugin, lobby, and window: routes, messages, numbers, states. |

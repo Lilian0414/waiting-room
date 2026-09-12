@@ -5,8 +5,8 @@ protocol. It does not change the lobby, matching, WebRTC, or room UI.
 
 ## Install this checkout
 
-Codex 0.144 or newer exposes the hook events used here. Add this repository as a local
-marketplace and install the plugin:
+Use a current Codex build whose `hooks/list` output exposes `Stop`, `Interrupt`, and
+`SessionEnd`. Add this repository as a local marketplace and install the plugin:
 
 ```sh
 codex plugin marketplace add .

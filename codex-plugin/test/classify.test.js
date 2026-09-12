@@ -63,7 +63,7 @@ test('notify argv input is supported and unrelated events stay silent', () => {
   }
 });
 
-test('bundled hook configuration uses every required Codex hook and timeoutSec', () => {
+test('bundled hook configuration uses every required Codex hook asynchronously', () => {
   const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../hooks/hooks.json'), 'utf8'));
   assert.deepStrictEqual(Object.keys(config.hooks), [
     'UserPromptSubmit', 'PreToolUse', 'PostToolUse', 'PermissionRequest',
@@ -72,8 +72,9 @@ test('bundled hook configuration uses every required Codex hook and timeoutSec',
   for (const [event, matchers] of Object.entries(config.hooks)) {
     assert.strictEqual(matchers.length, 1, event);
     const hook = matchers[0].hooks[0];
-    assert.strictEqual(hook.timeoutSec, 5, event);
-    assert.ok(!Object.hasOwn(hook, 'timeout'), event);
+    assert.strictEqual(hook.timeout, 5, event);
+    assert.ok(!Object.hasOwn(hook, 'timeoutSec'), event);
+    assert.strictEqual(hook.async, true, event);
     assert.match(hook.command, /\$\{CLAUDE_PLUGIN_ROOT\}\/scripts\/signal\.sh$/);
   }
 });

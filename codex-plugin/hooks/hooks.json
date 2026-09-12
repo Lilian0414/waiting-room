@@ -1,25 +1,25 @@
 {
   "hooks": {
     "UserPromptSubmit": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ],
     "PreToolUse": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ],
     "PostToolUse": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ],
     "PermissionRequest": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ],
     "Stop": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ],
     "Interrupt": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ],
     "SessionEnd": [
-      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeoutSec": 5 }] }
+      { "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/signal.sh", "timeout": 5, "async": true }] }
     ]
   }
 }
