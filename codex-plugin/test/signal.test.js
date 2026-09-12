@@ -14,6 +14,10 @@ const CASES = [
   ['pre-tool-use', 'tick', null, false],
   ['post-tool-use', 'tick', null, false],
   ['permission-request', 'needs_you', null, false],
+  ['stop', 'stopped', null, false],
+  ['stop-question', 'paused', 'question', false],
+  ['interrupt', 'stopped', null, false],
+  ['session-end', 'stopped', null, false],
   ['turn-complete', 'stopped', null, true],
   ['turn-question', 'paused', 'question', true],
 ];

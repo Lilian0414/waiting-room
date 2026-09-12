@@ -14,6 +14,10 @@ const CASES = [
   ['pre-tool-use', 'tick', null],
   ['post-tool-use', 'tick', null],
   ['permission-request', 'needs_you', null],
+  ['stop', 'stopped', null],
+  ['stop-question', 'paused', 'question'],
+  ['interrupt', 'stopped', null],
+  ['session-end', 'stopped', null],
   ['turn-complete', 'stopped', null],
   ['turn-question', 'paused', 'question'],
 ];
@@ -57,4 +61,25 @@ test('notify argv input is supported and unrelated events stay silent', () => {
     assert.strictEqual(run.stdout, '');
     assert.strictEqual(run.stderr, '');
   }
+});
+
+test('bundled hook configuration uses every required Codex hook and timeoutSec', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../hooks/hooks.json'), 'utf8'));
+  assert.deepStrictEqual(Object.keys(config.hooks), [
+    'UserPromptSubmit', 'PreToolUse', 'PostToolUse', 'PermissionRequest',
+    'Stop', 'Interrupt', 'SessionEnd',
+  ]);
+  for (const [event, matchers] of Object.entries(config.hooks)) {
+    assert.strictEqual(matchers.length, 1, event);
+    const hook = matchers[0].hooks[0];
+    assert.strictEqual(hook.timeoutSec, 5, event);
+    assert.ok(!Object.hasOwn(hook, 'timeout'), event);
+    assert.match(hook.command, /\$\{CLAUDE_PLUGIN_ROOT\}\/scripts\/signal\.sh$/);
+  }
+});
+
+test('installed plugin contains its own setup entry point', () => {
+  const toggle = path.join(__dirname, '../scripts/toggle.sh');
+  assert.ok(fs.statSync(toggle).isFile());
+  assert.match(fs.readFileSync(toggle, 'utf8'), /WR_HERE=.*BASH_SOURCE/);
 });

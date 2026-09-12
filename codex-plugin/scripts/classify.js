@@ -31,6 +31,12 @@ function classify(input) {
     case 'PreToolUse': return { event: 'tick', why: null };
     case 'PostToolUse': return { event: 'tick', why: null };
     case 'PermissionRequest': return { event: 'needs_you', why: null };
+    case 'Stop':
+      return endsWithQuestion(value(input, 'last_assistant_message', 'last-assistant-message'))
+        ? { event: 'paused', why: 'question' }
+        : { event: 'stopped', why: null };
+    case 'Interrupt':
+    case 'SessionEnd': return { event: 'stopped', why: null };
     default: return null;
   }
 }

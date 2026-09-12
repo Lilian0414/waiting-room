@@ -13,19 +13,12 @@ codex plugin marketplace add .
 codex plugin add waiting-room@waiting-room
 ```
 
-Codex's current hook set does not include a turn-completed event. Add the following to
-`~/.codex/config.toml` so its supported `agent-turn-complete` notification closes or
-pauses the Waiting Room task (replace the path with the installed plugin path):
-
-```toml
-notify = ["bash", "/absolute/path/to/installed/waiting-room/scripts/signal.sh"]
-```
-
-Waiting Room uses the same local state as the Claude plugin. Turn it on once from this
-checkout (an invite is optional):
+Waiting Room uses the same `~/.waiting-room` local state as the Claude plugin. Turn it
+on once from the installed Codex plugin root (an invite is optional):
 
 ```sh
-bash plugin/scripts/toggle.sh on [invite]
+cd /path/to/installed/waiting-room
+bash scripts/toggle.sh on [invite]
 ```
 
 `WAITING_ROOM_URL`, `~/.waiting-room/endpoint`, and the browser command overrides work
@@ -38,14 +31,18 @@ exactly as documented in `plugin/README.md`.
 | `UserPromptSubmit` | `started` |
 | `PreToolUse`, `PostToolUse` | `tick` |
 | `PermissionRequest` | `needs_you` |
-| `agent-turn-complete`, final message ends in `?` | `paused` with `why: "question"` |
-| other `agent-turn-complete` | `stopped` |
+| `Stop`, final assistant message ends in `?` | `paused` with `why: "question"` |
+| other `Stop` | `stopped` |
+| `Interrupt`, `SessionEnd` | `stopped` |
 
-Codex supplies different hook and notification shapes. Hook JSON is read from stdin and
-uses `session_id`; notification JSON arrives as the command's last argument and uses
-`thread-id`. Both identifiers are hashed locally. The outgoing body always has exactly
-`token`, `event`, `why`, `session`, and `ts`. Prompts, working directories, tool names and
-inputs, tool results, turn IDs, file contents, and assistant messages are discarded.
+Hook JSON is read from stdin and its `session_id` is hashed locally. The outgoing body
+always has exactly `token`, `event`, `why`, `session`, and `ts`. Prompts, working
+directories, tool names and inputs, tool results, turn IDs, file contents, and assistant
+messages are discarded.
+
+For backward compatibility only, `signal.sh` still accepts Codex's legacy
+`agent-turn-complete` notify JSON as its first argument. New installations do not need a
+global `notify` setting because the bundled first-class `Stop` hook handles turn completion.
 
 `SessionStart`, compaction, and subagent events are deliberately ignored; they do not
 describe a user task lifecycle.
